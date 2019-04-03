@@ -17,7 +17,7 @@ jdk 1.5+
 ## Usage
 ```java
 Money m1 = Currencies.USD.fromBasicUnitValue(1.01);//build a USD money instance by using basic unit, which is dollor.
-Money m2 = Currencies.USD.fromMinorUnitValue(1.09);//build a USD money instance by using minor unit, which is cent.
+Money m2 = Currencies.USD.fromMinorUnitValue(109);//build a USD money instance by using minor unit, which is cent.
 
 Money result = MoneyCalculator.add(m1, m2);
 
