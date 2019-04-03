@@ -1,5 +1,11 @@
 package com.github.ciferliu;
 
+/**
+ * The factory of currency.
+ * 
+ * @author Cifer Liu
+ * @since 1.0.0
+ */
 public class Currencies {
   private Currencies() {}
 

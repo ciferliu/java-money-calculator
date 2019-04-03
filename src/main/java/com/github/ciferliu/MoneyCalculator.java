@@ -2,6 +2,12 @@ package com.github.ciferliu;
 
 import java.math.BigDecimal;
 
+/**
+ * The calculator for money operations.
+ * 
+ * @author Cifer Liu
+ * @since 1.0.0
+ */
 public class MoneyCalculator {
   private MoneyCalculator() {}
 

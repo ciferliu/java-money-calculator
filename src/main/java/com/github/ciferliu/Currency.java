@@ -3,6 +3,12 @@ package com.github.ciferliu;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+/**
+ * currency context: currency alpha code, symbol and scale.
+ * 
+ * @author Cifer Liu
+ * @since 1.0.0
+ */
 public class Currency {
 
   /**
@@ -31,6 +37,7 @@ public class Currency {
    * @param code - the alpha code of currency, <strong>must not be null</strong>.
    * @param symbol - the symbol of currency, <strong>can be null</strong>.
    * @param scale - the number of digits after the decimal separator, <strong>must not be negative</strong>.
+   * @param roundingMode - the rounding mode, <strong>if null, HALF_EVEN(AKA: Banker's rounding) will be used</strong>.
    */
   public Currency(String code, String symbol, int scale, RoundingMode roundingMode) {
     if (code != null) {
@@ -80,6 +87,14 @@ public class Currency {
     return roundingMode;
   }
 
+  /**
+   * build a money instance by using the currency's basic unit.
+   * <p>
+   * for example, "USD 1.00", the basicUnitValue will be 1
+   * 
+   * @param basicUnitValue
+   * @return
+   */
   public Money fromBasicUnitValue(double basicUnitValue) {
     if (Double.isInfinite(basicUnitValue) || Double.isNaN(basicUnitValue)) {
       throw new IllegalArgumentException("basicUnitValue can't be Infinite or NaN");
@@ -87,6 +102,14 @@ public class Currency {
     return new Money(this, BigDecimal.valueOf(basicUnitValue).divide(BigDecimal.ONE, scale, roundingMode));
   }
 
+  /**
+   * build a money instance by using the currency's minor unit.
+   * <p>
+   * for example, "USD 1.00", the minorUnitValue will be 100 (cent)
+   * 
+   * @param minorUnitValue
+   * @return
+   */
   public Money fromMinorUnitValue(long minorUnitValue) {
     return new Money(this, BigDecimal.valueOf(minorUnitValue).divide(BigDecimal.TEN.pow(scale), scale, roundingMode));
   }
@@ -125,4 +148,8 @@ public class Currency {
     return true;
   }
 
+  @Override
+  public String toString() {
+    return "Currency [code=" + code + ", symbol=" + symbol + ", scale=" + scale + ", roundingMode=" + roundingMode + "]";
+  }
 }
