@@ -120,7 +120,6 @@ public class Currency {
     int result = 1;
     result = prime * result + ((code == null) ? 0 : code.hashCode());
     result = prime * result + scale;
-    result = prime * result + ((symbol == null) ? 0 : symbol.hashCode());
     return result;
   }
 
@@ -140,16 +139,18 @@ public class Currency {
       return false;
     if (scale != other.scale)
       return false;
-    if (symbol == null) {
-      if (other.symbol != null)
-        return false;
-    } else if (!symbol.equals(other.symbol))
-      return false;
     return true;
   }
 
   @Override
   public String toString() {
-    return "Currency [code=" + code + ", symbol=" + symbol + ", scale=" + scale + ", roundingMode=" + roundingMode + "]";
+    StringBuilder result = new StringBuilder(70);
+    result.append("Currency[");
+    result.append("code").append('=').append(code).append(',');
+    result.append("symbol").append('=').append(symbol).append(',');
+    result.append("scale").append('=').append(scale).append(',');
+    result.append("roundingMode").append('=').append(roundingMode == null ? null : roundingMode.name());
+    result.append(']');
+    return result.toString();
   }
 }
