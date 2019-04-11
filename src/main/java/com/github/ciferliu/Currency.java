@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
- * currency context: currency alpha code, symbol and scale.
+ * Immutable, thread-safe, currency context: currency alpha code, symbol and scale.
  * 
  * @author Cifer Liu
  * @since 1.0.0
@@ -65,10 +65,6 @@ public class Currency {
     this.code = code;
     this.symbol = symbol;
     this.scale = scale;
-  }
-
-  public void setSymbol(String symbol) {
-    this.symbol = symbol;
   }
 
   public String getCode() {

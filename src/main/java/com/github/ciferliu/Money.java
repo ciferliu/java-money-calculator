@@ -3,7 +3,7 @@ package com.github.ciferliu;
 import java.math.BigDecimal;
 
 /**
- * Immutable, amount with currency context.
+ * Immutable, thread-safe, amount with currency context.
  * 
  * @author Cifer Liu
  * @since 1.0.0
