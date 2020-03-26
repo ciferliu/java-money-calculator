@@ -3,23 +3,23 @@ A java tool for money calculate
 
 ***
 ## Requires
-jdk 1.5+
+jdk 1.7+
 
 ***
 ## Features
-+ ISO 4217 standard currencies
- + user-defined currencies
- + default rounding mode: HALF_EVEN (AKA: Banker's rounding)
- + support all of rounding modes of java.math.RoundingMode
- + operations: add/subtract/multiply/divide/fxByMultiply/fxByDivide/compare
++ ```ISO 4217``` standard currencies
++ user-defined currencies
++ support all of rounding modes of java.math.RoundingMode
++ operations: add/subtract/multiply/divide/fxByMultiply/fxByDivide/compare
 
 ***
 ## Usage
 ```java
-Money m1 = Currencies.USD.fromBasicUnitValue(1.01);//build a USD money instance by using basic unit, which is dollor.
-Money m2 = Currencies.USD.fromMinorUnitValue(109);//build a USD money instance by using minor unit, which is cent.
+Money m1 = CurrencyFactory.get("USD").fromBasicUnitValue(1.01);//build a USD money instance by using basic unit, which is dollor.
+Money m2 = CurrencyFactory.get("USD").fromMinorUnitValue(109);//build a USD money instance by using minor unit, which is cent.
 
-Money result = MoneyCalculator.add(m1, m2);
+MoneyCalculator calculator = MoneyCalculator.fromRoundingMode(RoundingMode.HALF_UP);
+Money result = calculator.init(m1).add(m2).getResult();
 
 double dollorValue = result.getBasicUnitValue();//2.1
 String dollorValueStr = result.getBasicUnitValueString();//"2.10"
@@ -29,13 +29,11 @@ long centValue = result.getMinorUnitValue();//210
 String resultStr = result.toString();//"USD 2.10"
 ```
 
-If your currency is not supported by Currencies, you can create it:
-```java
-//currency code=ETH
-//currency symbol=Ether
-//currency scale=18
-//roundingMode=HALF_UP
-Currency ETH = new Currency("ETH", "Ether", 18, RoundingMode.HALF_UP);
-
-ETH.fromBasicUnitValue(1);//1 Ether
+By default, ```CurrencyFactory``` only supported two currencies: ```CNY``` and ```USD```.<br>
+But, it's easy to extend, by adding a JSON config file named ```currency_factory_config.json``` in your CLASSPATH, and the config file format like this:
+```json
+[
+	{"code":"CNY","symbol":"¥","scale":2},
+    {"code":"USD","symbol":"$","scale":2}
+]
 ```
