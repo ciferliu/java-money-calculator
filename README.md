@@ -11,6 +11,7 @@ jdk 1.7+
 + user-defined currencies
 + support all of rounding modes of java.math.RoundingMode
 + operations: add/subtract/multiply/divide/fxByMultiply/fxByDivide/compare
++ Stream API: ```calculator.init(m1).add(m2).multiply(n).getResult()```
 
 ***
 ## Usage
