@@ -17,15 +17,6 @@ public class MoneyCalculatorTest {
     }
 
     @Test
-    public void testFromRoundingMode() {
-        MoneyCalculator calculator1 = MoneyCalculator.fromRoundingMode(RoundingMode.HALF_UP);
-        assertTrue(calculator == calculator1);
-
-        MoneyCalculator calculator2 = MoneyCalculator.fromRoundingMode(RoundingMode.HALF_EVEN);
-        assertTrue(calculator != calculator2);
-    }
-
-    @Test
     public void testAdd() {
         Money m1 = CurrencyFactory.get("CNY").fromBasicUnitValue(1.01);
         Money m2 = CurrencyFactory.get("CNY").fromBasicUnitValue(1.09);

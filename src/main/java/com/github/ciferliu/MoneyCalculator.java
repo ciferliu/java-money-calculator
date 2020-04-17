@@ -4,8 +4,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
- * The Money Calculator.
+ * The Money Calculator - <strong>non-threadsafe</strong>.
  * <p>
+ * 注意：此类为<strong>非线程安全</strong>，请确保在单线程下使用。<br> 
  * 用法：
  * 
  * <pre class="code">
@@ -24,7 +25,6 @@ import java.math.RoundingMode;
  * @date 2020/03/18
  */
 public class MoneyCalculator {
-    private static final MoneyCalculator[] CACHE = new MoneyCalculator[RoundingMode.values().length];
     private RoundingMode roundingMode = null;
     private Money result;
 
@@ -42,18 +42,7 @@ public class MoneyCalculator {
         if (roundingMode == null) {
             throw new IllegalArgumentException("roundingMode can't be null");
         }
-
-        MoneyCalculator c = CACHE[roundingMode.ordinal()];
-        if (c == null) {
-            synchronized (MoneyCalculator.class) {
-                c = CACHE[roundingMode.ordinal()]; // double check
-                if (c == null) {
-                    c = new MoneyCalculator(roundingMode);
-                    CACHE[roundingMode.ordinal()] = c;
-                }
-            }
-        }
-        return c;
+        return new MoneyCalculator(roundingMode);
     }
 
     /**
